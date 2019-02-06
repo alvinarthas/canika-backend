@@ -17,7 +17,7 @@ class Rating extends Model
     }
 
     public static function getPopularVendor(){
-        $rating = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')->join('tbl_gallery','tbl_barang.id','=','tbl_gallery.barang_id')->groupBy('tbl_rating.barang_id')->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc')->select('a.id','a.nama','a.avatar','a.deskripsi')->get();
+        $rating = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')->join('tbl_gallery','tbl_barang.id','=','tbl_gallery.barang_id')->groupBy('tbl_rating.barang_id')->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc')->select('a.id','a.nama','a.avatar','a.deskripsi')->distinct()->get();
         return $rating;
     }
 

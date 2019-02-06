@@ -58,7 +58,7 @@ class Notifikasi extends Model
         if($jenis == 1){
             $notif = Notifikasi::join('tbl_customer','tbl_customer.id','=','notifikasi.customer_id')->where('jenis',$jenis)->where('customer_id',$user)->select('notifikasi.*','tbl_customer.avatar','tbl_customer.username')->paginate(5);
         }elseif($jenis == 2){
-            $notif = Notifikasi::join('tbl_vendor','tbl_vendor.id','=','notifikasi.vendor_id')->where('jenis',$jenis)->where('vendor_id',$user)->paginate(5);
+            $notif = Notifikasi::join('tbl_vendor','tbl_vendor.id','=','notifikasi.vendor_id')->where('jenis',$jenis)->where('vendor_id',$user)->select('notifikasi.*','tbl_vendor.avatar','tbl_vendor.username')->paginate(5);
         }
         return $notif;
     }
