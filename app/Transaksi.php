@@ -23,7 +23,7 @@ class Transaksi extends Model
     }
 
     public static function trxCustomer($customer){
-        $transaksi = Transaksi::where('customer_id',$customer)->get();
+        $transaksi = Transaksi::where('customer_id',$customer)->where('status',0)->get();
         $data = collect();
         foreach($transaksi as $trx){
             $newtrx =  Transaksi::join('tbl_barang as b','b.id','=','tbl_trx.barang_id')
@@ -60,7 +60,7 @@ class Transaksi extends Model
     }
 
     public static function trxHistory($customer){
-        $transaksi = Transaksi::where('customer_id',$customer)->where('status',1)->get();
+        $transaksi = Transaksi::where('customer_id',$customer)->where('status',1)->orWhere('status',99)->get();
         $data = collect();
         foreach($transaksi as $trx){
             $newtrx =  Transaksi::join('tbl_barang as b','b.id','=','tbl_trx.barang_id')
@@ -68,7 +68,7 @@ class Transaksi extends Model
             ->join('tbl_gallery as g','b.id','=','g.barang_id')
             ->join('tbl_trxhistory as t','t.trx_id','=','tbl_trx.id')
             ->join('keterangan_payment as k','t.status','=','k.id')
-            ->select(DB::raw('tbl_trx.id as trx_id,tbl_trx.harga,tbl_trx.dp_persen,v.nama as vendor,v.avatar,b.nama as barang,g.image,k.keterangan'))
+            ->select(DB::raw('tbl_trx.status,tbl_trx.id as trx_id,tbl_trx.harga,tbl_trx.dp_persen,v.nama as vendor,v.avatar,b.nama as barang,g.image,k.keterangan'))
             ->where('tbl_trx.id',$trx->id)
             ->orderBy('g.id','ASC')
             ->orderBy('t.created_at','DESC')

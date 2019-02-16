@@ -46,7 +46,7 @@ class TransaksiController extends Controller
         $data = array(
             'code' => '200',
             'status' => 'success',
-            'message' => 'Daftar Transaksi',
+            'message' => 'Daftar Transaksi History',
             'data' => $transaksi
         );
 
@@ -171,7 +171,7 @@ class TransaksiController extends Controller
             $transaksi->save();
 
             // notifikasi
-            $notifikasi1 = Notifikasi::addNotifikasi($cancel_by,$trx->id,1);
+            $notifikasi1 = Notifikasi::addNotifikasi($cancel_by,$transaksi->id,1);
 
             $statusCode = 200;
             $data = array(

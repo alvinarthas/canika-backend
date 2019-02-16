@@ -39,7 +39,6 @@ class VendorController extends Controller
             'nama' => 'required|string|max:50',
             'alamat' => 'required',
             'email_perusahaan' => 'required|email',
-            'website' => 'required',
         ]);
         // IF Validation fail
         if ($validator->fails()) {
@@ -479,9 +478,9 @@ class VendorController extends Controller
         if($vendor){
             $barang = collect();
             if($status!=NULL){
-                $getbrg = $vendor->barang()->where('status',$status)->paginate(3);
+                $getbrg = $vendor->barang()->where('status',$status)->get();
             }else{
-                $getbrg = $vendor->barang()->paginate(3);
+                $getbrg = $vendor->barang()->get();
             }
             foreach($getbrg as $brg){
                 $brrg = collect($brg);
@@ -638,7 +637,7 @@ class VendorController extends Controller
             $data = array(
                 'code' => '200',
                 'status' => 'success',
-                'message' => 'Data Vendor Popular',
+                'message' => 'Data Filter Vendor',
                 'data' => $rate,
             );
         }else{

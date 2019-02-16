@@ -30,7 +30,7 @@ class Vendor extends Model
     }
 
     public static function searchVendor($param){
-        $barangall = Barang::join('tbl_vendor','tbl_vendor.id','=','tbl_barang.vendor_id')->where('tbl_barang.nama','like',$param.'%')->orWhere('tbl_vendor.nama','like',$param.'%')->select('tbl_vendor.id','tbl_vendor.nama','tbl_vendor.avatar')->distinct()->get();
+        $barangall = Barang::join('tbl_vendor','tbl_vendor.id','=','tbl_barang.vendor_id')->where('tbl_barang.nama','like','%'.$param.'%')->orWhere('tbl_vendor.nama','like','%'.$param.'%')->select('tbl_vendor.id','tbl_vendor.nama','tbl_vendor.avatar')->groupBy('tbl_barang.vendor_id')->distinct()->get();
         return $barangall;
     }
 
