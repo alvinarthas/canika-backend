@@ -12,6 +12,10 @@ class Barang extends Model
     protected $table = 'tbl_barang';
     protected $fillable = ['nama','kat_id','deskripsi','jenis','qty','harga1','harga2','vendor_id','status','kategori_value'];
 
+    public function vendor(){
+        return $this->belongsTo('App\Vendor');
+    }
+
     public function gallery(){
         return $this->hasMany('App\Gallery');
     }

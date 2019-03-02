@@ -7,6 +7,12 @@ use App\Subscribe;
 
 class SubscribeController extends Controller
 {
+    public function index(){
+        $subscribe = Subscribe::all();
+
+        return view('admin.subscribe.index',compact('subscribe'));
+    }
+
     public function subscribe(Request $request){
         $subs = new Subscribe(array(
             'email' => $request->email,

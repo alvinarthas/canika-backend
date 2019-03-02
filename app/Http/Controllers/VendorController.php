@@ -226,9 +226,8 @@ class VendorController extends Controller
                     'message' => 'Data vendor tidak ditemukan, username/password anda salah!!!',
                 );
             }
-
-            return response()->json($data,$statusCode);
         }
+        return response()->json($data,$statusCode);
     }
 
     // KONFIRMASI

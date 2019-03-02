@@ -95,6 +95,7 @@ use Illuminate\Http\Request;
         Route::post('/barang-search','API\BarangController@search');
         // Popular
         Route::get('/barang-popular/{customer}','API\BarangController@popular');
+        Route::delete('/gallery-delete','API\BarangController@gallery_delete');
 
 // API NEGO HARGA
     Route::post('/nego-store', 'NegoController@store');

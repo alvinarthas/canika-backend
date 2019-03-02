@@ -390,6 +390,7 @@ class TransaksiController extends Controller
                     $rate = 0;
                 }
                 $wish_collect->put('rate',$rate);
+                $wish_collect->put('wishlist',1);
                 $all_wish->push($wish_collect);
             }
             $statusCode = 200;

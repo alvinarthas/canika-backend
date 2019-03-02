@@ -165,4 +165,12 @@ class Transaksi extends Model
         $trx->status = 1;
         $trx->save();
     }
+
+    public function customer(){
+        return $this->belongsTo('App\Customer');
+    }
+
+    public function barang(){
+        return $this->belongsTo('App\Barang');
+    }
 }

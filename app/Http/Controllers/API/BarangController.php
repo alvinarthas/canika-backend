@@ -337,4 +337,28 @@ class BarangController extends Controller
         return response()->json($data,$statusCode);
     }
 
+    public function gallery_delete(Request $request){
+        $image = $request->image;
+
+        $gallery = Gallery::where('image',$image);
+        if($gallery){
+            $gallery->delete();
+            $statusCode = 200;
+            $data = array(
+                'code' => '200',
+                'status' => 'success',
+                'message' => 'Data Gambar Berhasil dihapus',
+            );
+        }else{
+            $statusCode = 500;
+            $data = array(
+                'code' => '500',
+                'status' => 'error',
+                'message' => 'Data Gambar tidak ditemukan'
+            );
+        }
+        // Send Response
+        return response()->json($data,$statusCode);
+    }
+
 }
