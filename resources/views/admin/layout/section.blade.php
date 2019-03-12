@@ -1,6 +1,6 @@
 @extends('admin.layout.main')
 
-@section('content_css')
+@section('css')
 @endsection
 
 @section('content')

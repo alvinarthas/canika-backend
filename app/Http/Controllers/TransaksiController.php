@@ -18,22 +18,14 @@ class TransaksiController extends Controller
     public function list_customer(Request $request){
         $customer = $request->customer_id;
         $transaksi = Transaksi::trxCustomer($customer);
-        if(count($transaksi) > 0){
-            $statusCode = 200;
-            $data = array(
-                'code' => '200',
-                'status' => 'success',
-                'message' => 'Daftar Transaksi',
-                'data' => $transaksi
-            );
-        }else{
-            $statusCode = 500;
-            $data = array(
-                'code' => '500',
-                'status' => 'error',
-                'message' => 'Data Transaksi Customer tidak ditemukan'
-            );
-        }
+        
+        $statusCode = 200;
+        $data = array(
+            'code' => '200',
+            'status' => 'success',
+            'message' => 'Daftar Transaksi',
+            'data' => $transaksi
+        );
         
         return response()->json($data,$statusCode);
     }

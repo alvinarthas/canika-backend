@@ -45,7 +45,9 @@
                     <td><label class="badge badge-danger">Batal</label></td>
                 @endif
                 <td>{{$trx->catatan}}</td>
-                <td></td>
+                <td>
+                  <a class="btn btn-gradient-danger btn-rounded btn-fw" href="{{route('editTransaksi',['id' => $trx->id])}}">Ubah Status Transaksi</a>
+                </td>
             </tr>
           @php($i++)  
           @endforeach

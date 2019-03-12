@@ -15,4 +15,4 @@
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
     @yield('css')
-  </head>
+</head>

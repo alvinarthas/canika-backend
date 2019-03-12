@@ -684,22 +684,14 @@ class VendorController extends Controller
         $status = $request->status;
 
         $transaksi = Transaksi::trxVendor($vendor,$status);
-        if(count($transaksi) > 0){
-            $statusCode = 200;
-            $data = array(
-                'code' => '200',
-                'status' => 'success',
-                'message' => 'Daftar Transaksi',
-                'data' => $transaksi
-            );
-        }else{
-            $statusCode = 500;
-            $data = array(
-                'code' => '500',
-                'status' => 'error',
-                'message' => 'Data Transaksi Customer tidak ditemukan'
-            );
-        }
+        
+        $statusCode = 200;
+        $data = array(
+            'code' => '200',
+            'status' => 'success',
+            'message' => 'Daftar Transaksi',
+            'data' => $transaksi
+        );
         
         return response()->json($data,$statusCode);
     }

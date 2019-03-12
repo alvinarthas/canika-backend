@@ -124,22 +124,13 @@ class UserController extends Controller
         // customer
         $notif = Notifikasi::getNotif($jenis,$user);
 
-        if(count($notif) > 0){
-            $statusCode = 200;
-            $data = array(
-                'code' => '200',
-                'status' => 'success',
-                'message' => 'Transaksi Berhasil dicatat',
-                'data' => $notif
-            );
-        }else{
-            $statusCode = 500;
-            $data = array(
-                'code' => '500',
-                'status ' => 'error',
-                'message' => 'Notifikasi tidak ditemukan',
-            );
-        }
+        $statusCode = 200;
+        $data = array(
+            'code' => '200',
+            'status' => 'success',
+            'message' => 'Data Notifikasi',
+            'data' => $notif
+        );
 
         // Send Response
         return response()->json($data,$statusCode);

@@ -14,7 +14,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/admin/home">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
             </a>
@@ -53,8 +53,8 @@
             </a>
             <div class="collapse" id="ui-admin">
                 <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">Index</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">Add Vendor</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('getAdmin')}}">Index</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('createAdmin')}}">Add Vendor</a></li>
                 </ul>
             </div>
         </li>
@@ -67,8 +67,11 @@
                 <div class="collapse" id="ui-master">
                     <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('getKategori')}}">Kategori Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('createKategori')}}">Add Kategori</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('getBank')}}">Bank Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('createBank')}}">Add Bank</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('getRekening')}}">Rekening Management</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('createRekening')}}">Add Rekening</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('getSubscribe')}}">Subscribe Management</a></li>
                     </ul>
                 </div>

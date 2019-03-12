@@ -25,7 +25,14 @@
               <td><img src="{{$kat->image}}" width="50%" alt="image"/></td>
               <td>{{$kat->nama}}</td>
               <td>{{$kat->deskripsi}}</td>
-              <td></td>
+              <td>
+                <form action="{{route('destroyKategori',['id' => $kat->id])}}" method="POST">
+                  {{ csrf_field()}}
+                  {{ method_field('DELETE') }}
+                    <a class="btn btn-gradient-danger btn-rounded btn-fw" href="{{route('editKategori',['id' => $kat->id])}}">Ubah</a>
+                    <button class="btn btn-danger" onclick="return confirm('Anda Yakin ingin Menghapus?');"><i class="fa fa-close" aria-hidden="true"></i> Hapus</button>
+                </form>
+              </td>
             </tr>
           @php($i++)  
           @endforeach

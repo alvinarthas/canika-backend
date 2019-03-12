@@ -16,6 +16,9 @@ class Vendor extends Model
     public function barang(){
         return $this->hasMany('App\Barang');
     }
+    public function status(){
+        return $this->hasMany('App\Status','status');
+    }
     public static function verifyAccount($email,$token){
         return Vendor::where(['email'=>$email,'verifyToken'=>$token])->update(['status'=>'1','email_konf'=>1,'verifyToken'=>NULL]);
     }

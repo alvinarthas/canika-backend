@@ -35,7 +35,7 @@
               <td>{{$bayar->nama_pengirim}}</td>
               <td>{{$bayar->bank_pengirim}}</td>
               <td>{{$bayar->bank()->first()->nama}}</td>
-              <td>{{$bayar->bukti_bayar}}</td>
+              <td><img src="{{$bayar->bukti_bayar}}"width="25%" alt="image"/></td>
               <td>{{$bayar->tgl_trf}}</td>
               @if($bayar->status == 0)
                 <td><a href="{{route('approvePayment',['payment'=>$bayar->id,'trx'=>$bayar->trx_id,'dp'=>$bayar->trx->dp_status])}}">Approve Sekarang</a></td>

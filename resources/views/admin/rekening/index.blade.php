@@ -28,7 +28,14 @@
               <td>{{$rek->bank->nama}}</td>
               <td>{{$rek->nama_pemilik}}</td>
               <td>{{$rek->norek}}</td>
-              <td></td>
+              <td>
+                <form action="{{route('destroyRekening',['id' => $rek->id])}}" method="POST">
+                  {{ csrf_field()}}
+                  {{ method_field('DELETE') }}
+                    <a class="btn btn-gradient-danger btn-rounded btn-fw" href="{{route('editRekening',['id' => $rek->id])}}">Ubah</a>
+                    <button class="btn btn-danger" onclick="return confirm('Anda Yakin ingin Menghapus?');"><i class="fa fa-close" aria-hidden="true"></i> Hapus</button>
+                </form>
+              </td>
             </tr>
           @php($i++)  
           @endforeach
