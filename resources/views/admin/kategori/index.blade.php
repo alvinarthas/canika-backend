@@ -22,7 +22,7 @@
           @foreach($kategori as $kat)
             <tr>
               <td>{{$i}}</td>
-              <td><img src="{{$kat->image}}" width="50%" alt="image"/></td>
+              <td><img src="{{$kat->avatar}}" width="50%" alt="image"/></td>
               <td>{{$kat->nama}}</td>
               <td>{{$kat->deskripsi}}</td>
               <td>

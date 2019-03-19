@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Admins;
+use App\Admin;
 use App\Status;
 
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class WebAdmin extends Controller
 {
     public function index(){
-        $admin = Admins::all();
+        $admin = Admin::all();
 
         return view('admin.admin.index',compact('admin'));
     }
@@ -57,14 +57,14 @@ class WebAdmin extends Controller
 
     public function edit($id){
         $jenis = "edit";
-        $admin = Admins::where('id',$id)->first();
+        $admin = Admin::where('id',$id)->first();
         $status = Status::where('jenis','admin')->get();
         return view('admin.admin.form',compact('jenis','admin','status'));
     }
 
     public function update(Request $request, $id){
         
-        $admin = Admins::where('id',$id)->first();
+        $admin = Admin::where('id',$id)->first();
         try{
             $admin->update(request()->all());
 

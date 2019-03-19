@@ -26,7 +26,7 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left p-5">
               <div class="brand-logo">
-                <img src="{{ asset('admin/images/logo.svg') }}">
+                <img src="{{ asset('admin/images/canika/canikalogo.png') }}">
               </div>
               <h4>Hello! Yuk</h4>
               <h6 class="font-weight-light">Login disini</h6>
