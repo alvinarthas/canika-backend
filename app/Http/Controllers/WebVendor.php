@@ -61,6 +61,7 @@ class WebVendor extends Controller
                 'alamat' => $request->alamat,
                 'email_perusahaan' => $request->email_perusahaan,
                 'website' => $request->website,
+                'avatar' => $request->avatar,
                 'status' => 0,
                 'email_konf' => 0,
                 'sms_konf' => 0,

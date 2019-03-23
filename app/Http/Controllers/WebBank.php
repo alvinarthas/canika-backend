@@ -31,6 +31,7 @@ class WebBank extends Controller
         }else{
             $bank = new Bank(array(
                 'nama' => $request->nama,
+                'image' => $request->image,
             ));
             
             try{

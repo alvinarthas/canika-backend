@@ -60,7 +60,7 @@ class Transaksi extends Model
     }
 
     public static function trxHistory($customer){
-        $transaksi = Transaksi::where('customer_id',$customer)->where('status',1)->orWhere('status',99)->get();
+        $transaksi = Transaksi::where('customer_id',$customer)->whereIn('status',array(1,99))->get();
         $data = collect();
         foreach($transaksi as $trx){
             $newtrx =  Transaksi::join('tbl_barang as b','b.id','=','tbl_trx.barang_id')

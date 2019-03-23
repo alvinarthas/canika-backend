@@ -33,6 +33,7 @@ class WebKategori extends Controller
             $kategori = new Kategori(array(
                 'nama' => $request->nama,
                 'deskripsi' => $request->deskripsi,
+                'avatar' => $request->avatar,
             ));
             
             try{

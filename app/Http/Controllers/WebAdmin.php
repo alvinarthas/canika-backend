@@ -29,7 +29,7 @@ class WebAdmin extends Controller
         // Validate
         $validator = Validator::make($request->all(), [
             'username' => 'required',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:6|confirmed',
             'nama' => 'required|string|max:50',
         ]);
         // IF Validation fail
@@ -37,11 +37,12 @@ class WebAdmin extends Controller
             return redirect()->back()->withErrors($validator->errors());
         // Validation success
         }else{
-            $admins = new Admins(array(
+            $admins = new Admin(array(
                 'username' => $request->username,
                 'password' => Hash::make($request->password),
                 'nama' => $request->nama,
                 'status' => 1,
+                'avatar' => $request->avatar,
             ));
 
             try{

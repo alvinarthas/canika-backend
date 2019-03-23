@@ -47,9 +47,10 @@ class Barang extends Model
             }
 
             $kategori = $barang->kategori()->first();
+
             $brg->put('field',$kategori->field);
-            $brg->put('prov',$kategori->prov);
-            $brg->put('kota',$kategori->kota);
+            $brg->put('prov',$barang->vendor()->first()->prov);
+            $brg->put('kota',$barang->vendor()->first()->kota);
 
             return $brg->put('gallery',$gallery);
         }
