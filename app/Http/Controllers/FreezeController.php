@@ -84,7 +84,8 @@ class FreezeController extends Controller
                 $data = array(
                     'code' => '500',
                     'status' => 'error',
-                    'message' => $e,
+                    'error_message' => $e,
+                    'message' => 'Terjadi kesalahan pada sistem, silahkan diperiksa kembali',
                 );
             }
         }
@@ -186,7 +187,8 @@ class FreezeController extends Controller
                 $data = array(
                     'code' => '500',
                     'status' => 'error',
-                    'message' => $e,
+                    'error_message' => $e,
+                    'message' => 'Terjadi kesalahan pada sistem, silahkan diperiksa kembali',
                 );
             }
         }

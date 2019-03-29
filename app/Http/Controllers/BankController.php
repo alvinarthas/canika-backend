@@ -61,7 +61,8 @@ class BankController extends Controller
                     $data = array(
                         'code' => '500',
                         'status' => 'error',
-                        'message' => $e,
+                        'error_message' => $e,
+                        'message' => 'Terjadi kesalahan pada sistem, silahkan diperiksa kembali',
                     );
             }
         }
@@ -127,7 +128,8 @@ class BankController extends Controller
                     $data = array(
                         'code' => '200',
                         'status' => 'success',
-                        'message' => $e
+                        'error_message' => $e,
+                        'message' => 'Terjadi kesalahan pada sistem, silahkan diperiksa kembali',
                     );
                 }
             }else{
@@ -258,7 +260,8 @@ class BankController extends Controller
                     $data = array(
                         'code' => '500',
                         'status' => 'error',
-                        'message' => $e,
+                        'error_message' => $e,
+                        'message' => 'Terjadi kesalahan pada sistem, silahkan diperiksa kembali',
                     );
             }
         }
@@ -300,7 +303,8 @@ class BankController extends Controller
                     $data = array(
                         'code' => '200',
                         'status' => 'success',
-                        'message' => $e
+                        'error_message' => $e,
+                        'message' => 'Terjadi kesalahan pada sistem, silahkan diperiksa kembali',
                     );
                 }
             }else{
