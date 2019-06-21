@@ -31,7 +31,7 @@
                         </div>
                     @endif
                         <div class="form-group">
-                            <label for="exampleInputName1">Nama Bank</label>
+                            <label for="exampleInputName1">Nama Kategori</label>
                             <input type="text" class="form-control" id="nama" name="nama" placeholder="Name" value="@isset($kategori->nama){{$kategori->nama}}@endisset" required>
                         </div>
                         <div class="form-group">

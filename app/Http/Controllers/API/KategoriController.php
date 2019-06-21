@@ -49,7 +49,7 @@ class KategoriController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -134,7 +134,7 @@ class KategoriController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         }else{
             $kategori = Kategori::where('id',$id)->first();

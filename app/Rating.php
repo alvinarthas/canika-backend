@@ -17,7 +17,7 @@ class Rating extends Model
     }
 
     public static function getPopularVendor(){
-        $rating = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')->join('tbl_gallery','tbl_barang.id','=','tbl_gallery.barang_id')->groupBy('tbl_rating.barang_id')->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc')->select('a.id','a.nama','a.avatar','a.deskripsi')->distinct()->get();
+        $rating = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')->join('tbl_gallery','tbl_barang.id','=','tbl_gallery.barang_id')->where('a.status',1)->groupBy('tbl_rating.barang_id')->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc')->select(DB::raw('(SUM(value) / COUNT(value)) as rate,a.id,a.nama,a.avatar,a.deskripsi'))->distinct()->get();
         return $rating;
     }
 
@@ -27,7 +27,7 @@ class Rating extends Model
     }
 
     public static function filterRating($harga1,$harga2,$rating,$kat){
-        $rate = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id');
+        $rate = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')->where('a.status',1);
         
         if($kat <> ''){
             $rate->where('tbl_barang.kat_id',$kat);
@@ -47,7 +47,7 @@ class Rating extends Model
     public static function filterRatingSearch($harga1,$harga2,$rating,$kat,$param){
         $rate = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')
         ->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')
-        ->join('tbl_gallery','tbl_barang.id','=','tbl_gallery.barang_id');
+        ->join('tbl_gallery','tbl_barang.id','=','tbl_gallery.barang_id')->where('a.status',1);
         if($kat <> ''){
             $rate->where('tbl_barang.kat_id',$kat);
         }

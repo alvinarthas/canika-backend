@@ -48,7 +48,7 @@ class KomentarController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
 
         }else{
@@ -102,7 +102,7 @@ class KomentarController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
 
         }else{
@@ -181,7 +181,7 @@ class KomentarController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         }else{
             $rating = new Rating(array(

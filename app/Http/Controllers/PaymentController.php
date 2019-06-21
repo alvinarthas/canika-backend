@@ -128,7 +128,7 @@ class PaymentController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
 
         }else{
@@ -181,7 +181,7 @@ class PaymentController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
 
         }else{
@@ -252,7 +252,7 @@ class PaymentController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         }else{
             $payment = Payment::where('id',$request->payment_id)->where('trx_id',$request->trx_id)->first();

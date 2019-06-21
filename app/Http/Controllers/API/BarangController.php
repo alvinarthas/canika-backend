@@ -54,7 +54,7 @@ class BarangController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -162,7 +162,7 @@ class BarangController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         }else{
             $barang = Barang::where('id',$id)->first();

@@ -83,7 +83,7 @@ class TransaksiController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
 
         }else{
@@ -247,7 +247,7 @@ class TransaksiController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
 
         }else{
@@ -304,7 +304,7 @@ class TransaksiController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
 
         }else{
@@ -420,7 +420,7 @@ class TransaksiController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{

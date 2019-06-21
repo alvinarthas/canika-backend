@@ -58,13 +58,11 @@ class CustomerController extends Controller
         // Validate
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:tbl_customer',
-            'username' => 'required|string|max:50',
+            // 'username' => 'required|string|max:50',
             'password' => 'required|min:8|confirmed',
             'hp' => 'required|string|max:14',
             'first_name' => 'required|string|max:50',
             'last_name' => 'required|string|max:50',
-            // 'tanggal_lahir' => 'required|date|date_format:Y-m-d',
-            // 'tempat_lahir' => 'required|string|max:50',
             'tanggal_nikah' => 'nullable|date|date_format:Y-m-d',
             'gender' => 'required',
         ]);
@@ -75,12 +73,12 @@ class CustomerController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
             $customer = new Customer(array(
-                'username' => $request->username,
+                // 'username' => $request->username,
                 'password' => Hash::make($request->password),
                 'email' => $request->email,
                 'hp' => $request->hp,
@@ -163,7 +161,7 @@ class CustomerController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -185,7 +183,7 @@ class CustomerController extends Controller
                 $data = array(
                     'code' => '500',
                     'status' => 'error',
-                    'message' => 'Data customer tidak ditemukan, username/password anda salah!!!',
+                    'message' => 'Data customer tidak ditemukan, email/password anda salah!!!',
                 );
             }
 
@@ -209,7 +207,7 @@ class CustomerController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -247,7 +245,7 @@ class CustomerController extends Controller
                 $data = array(
                     'code' => '500',
                     'status' => 'error',
-                    'message' => 'Data customer tidak ditemukan, username/password anda salah!!!',
+                    'message' => 'Data customer tidak ditemukan, email/password anda salah!!!',
                 );
             }
         }
@@ -270,7 +268,7 @@ class CustomerController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -332,7 +330,7 @@ class CustomerController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -392,7 +390,7 @@ class CustomerController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -429,7 +427,7 @@ class CustomerController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{

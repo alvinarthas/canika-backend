@@ -10,7 +10,6 @@ class WebBank extends Controller
 {
     public function index(){
         $banks = Bank::all();
-
         return view('admin.bank.index',compact('banks'));
     }
 

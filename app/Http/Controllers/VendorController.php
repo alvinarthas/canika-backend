@@ -47,7 +47,7 @@ class VendorController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -144,7 +144,7 @@ class VendorController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -203,7 +203,7 @@ class VendorController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -250,22 +250,22 @@ class VendorController extends Controller
         if($vendor){
             Vendor::verifyAccount($email,$verifyToken);
             // Go To Page Succes
-            // return redirect('/')->with('status', 'Selamat!!! Akun anda telah diverifikasi. Silahkan masuk dengan akun anda.');
+            return redirect('/')->with('status', 'Selamat!!! Akun anda telah diverifikasi. Silahkan masuk dengan akun anda.');
         }else{
             // Go To Page Failed
-            // return redirect('/')->with('status', 'Terjadi Kesalahan pada Verifikasi Akun anda');
+            return redirect('/')->with('status', 'Terjadi Kesalahan pada Verifikasi Akun anda');
         }
     }
 
-    public function vendor_sms(){
-        $nexmo = app('Nexmo\Client');
+    // public function vendor_sms(){
+    //     $nexmo = app('Nexmo\Client');
 
-        $nexmo->message()->send([
-            'to'   => '6282216418599',
-            'from' => '6287722044120',
-            'text' => 'Testing SMS Canika'
-        ]);
-    }
+    //     $nexmo->message()->send([
+    //         'to'   => '6282216418599',
+    //         'from' => '6287722044120',
+    //         'text' => 'Testing SMS Canika'
+    //     ]);
+    // }
 
     public function email_update(Request $request){
         // Validate
@@ -282,7 +282,7 @@ class VendorController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -343,7 +343,7 @@ class VendorController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -403,7 +403,7 @@ class VendorController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
@@ -441,7 +441,7 @@ class VendorController extends Controller
                 'code' => '500',
                 'status' => 'error',
                 'message' => 'Silahkan cek kelengkapan form anda',
-                'data' => $validator->errors(),
+                'data' => $validator->errors()->all(),
             );
         // Validation success
         }else{
