@@ -24,11 +24,11 @@ class Vendor extends Model
     }
 
     public static function getCategory($id){
-        return Barang::join('tbl_vendor','tbl_vendor.id','=','tbl_barang.vendor_id')->where('tbl_barang.kat_id',$id)->select('tbl_vendor.id','tbl_vendor.nama','tbl_vendor.avatar')->distinct()->get();
+        return Barang::join('tbl_vendor','tbl_vendor.id','=','tbl_barang.vendor_id')->where('tbl_barang.kat_id',$id)->where('tblvendor.status',1)->select('tbl_vendor.id','tbl_vendor.nama','tbl_vendor.avatar')->distinct()->get();
     }
 
     public static function getRating($id){
-        $rating = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')->where('a.id',$id)->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc')->select(DB::raw('(SUM(value) / COUNT(value)) as rata'))->get();
+        $rating = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')->where('a.id',$id)->where('a.status',1)->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc')->select(DB::raw('(SUM(value) / COUNT(value)) as rata'))->get();
         return $rating;
     }
 

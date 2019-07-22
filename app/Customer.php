@@ -8,7 +8,7 @@ class Customer extends Model
 {
     protected $table = 'tbl_customer';
     protected $fillable = [
-        'username', 'email', 'password','hp','first_name','last_name','tanggal_lahir','tempat_lahir','prov','kota','tanggal_nikah','avatar','status','verifyToken','gender','notif_id'
+        'username', 'email', 'password','hp','first_name','last_name','tanggal_lahir','tempat_lahir','prov','kota','tanggal_nikah','avatar','status','verifyToken','gender','notif_id','deviceID'
     ];
 
     /**

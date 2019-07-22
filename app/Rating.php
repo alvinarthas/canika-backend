@@ -26,30 +26,46 @@ class Rating extends Model
         return $rating;
     }
 
-    public static function filterRating($harga1,$harga2,$rating,$kat){
-        $rate = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')->where('a.status',1);
-        
+    public static function filterRating($harga1,$harga2,$rating,$kat,$tag){
+        $rate = Barang::join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')
+        ->join('brg_tag','brg_tag.barang_id','=','tbl_barang.id');
+
+        if($rating <> ''){
+            $rate->join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id');
+        }
+        $rate->where('a.status',1);
+        if(is_array($tag)){
+            $rate->whereIn('brg_tag.tag_id',$tag)->get();
+        }
         if($kat <> ''){
             $rate->where('tbl_barang.kat_id',$kat);
         }
+        
         if($harga1 <> '' && $harga2 <> ''){
             $rate->whereBetween('tbl_barang.harga1',[$harga1,$harga2]);
         }
-        $rate->select(DB::raw('a.id,a.nama,a.avatar,a.deskripsi'))->groupBy('tbl_rating.barang_id');
+        $rate->select(DB::raw('a.id,a.nama,a.avatar,a.deskripsi'));
         if($rating <> ''){
+            $rate->groupBy('tbl_rating.barang_id');
             $rate->havingRaw(DB::raw('(SUM(tbl_rating.value) / COUNT(tbl_rating.value)) BETWEEN '.$rating.' AND '.($rating+0.9).''));
+            $rate->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc');
         }
-        $rate->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc');
 
         return $rate->distinct()->get();
     }
 
-    public static function filterRatingSearch($harga1,$harga2,$rating,$kat,$param){
-        $rate = Barang::join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id')
-        ->join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')
-        ->join('tbl_gallery','tbl_barang.id','=','tbl_gallery.barang_id')->where('a.status',1);
+    public static function filterRatingSearch($harga1,$harga2,$rating,$kat,$param,$tag){
+        $rate = Barang::join('tbl_vendor as a','a.id','=','tbl_barang.vendor_id')
+        ->join('tbl_gallery','tbl_barang.id','=','tbl_gallery.barang_id')
+        ->join('brg_tag','brg_tag.barang_id','=','tbl_barang.id')->where('a.status',1);
+        if($rating <> ''){
+            $rate->join('tbl_rating','tbl_rating.barang_id','=','tbl_barang.id');
+        }
         if($kat <> ''){
             $rate->where('tbl_barang.kat_id',$kat);
+        }
+        if(is_array($tag)){
+            $rate->whereIn('brg_tag.tag_id',$tag);
         }
         if($harga1 <> '' && $harga2 <> ''){
             $rate->whereBetween('tbl_barang.harga1',[$harga1,$harga2]);
@@ -58,12 +74,12 @@ class Rating extends Model
             $rate->where('tbl_barang.nama','like','%'.$param.'%')->orWhere('a.nama','like','%'.$param.'%');
         }
         
-        $rate->select(DB::raw('a.id,a.nama,a.avatar,a.deskripsi'))->groupBy('tbl_rating.barang_id');
+        $rate->select(DB::raw('a.id,a.nama,a.avatar,a.deskripsi'));
         if($rating <> ''){
+            $rate->groupBy('tbl_rating.barang_id');
             $rate->havingRaw(DB::raw('(SUM(tbl_rating.value) / COUNT(tbl_rating.value)) BETWEEN '.$rating.' AND '.($rating+0.9).''));
+            $rate->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc');
         }
-       
-        $rate->orderBy(DB::raw('(SUM(value) / COUNT(value))'),'desc');
-        return $rate->get();
+        return $rate->distinct()->get();
     }
 }

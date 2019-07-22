@@ -24,19 +24,6 @@ class WebVendor extends Controller
         return view('admin.vendor.form',compact('jenis'));
     }
 
-    // KONFIRMASI
-    public function sendEmail($vendor){
-        $data = array(
-            'email' => $vendor->email,
-            'route' => 'vendorVerify',
-            'verifyToken' => $vendor->verifyToken
-        );
-        Mail::send('mail.verifyEmail',$data, function($message) use ($data){
-            $message->to($data['email']);
-            $message->subject('Vendor Register');
-        });
-    }
-
     public function store(Request $request){
         // Validate
         $validator = Validator::make($request->all(), [
@@ -101,5 +88,49 @@ class WebVendor extends Controller
 
     public function delete($id){
 
+    }
+
+    public function vendor_verify(Request $request){
+        // Validate
+        $validator = Validator::make($request->all(), [
+            'vendor_id' => 'required|unique:tbl_vendor',
+            'status' => 'required|number',
+            'verifyConfirmation' => 'string',
+        ]);
+        // IF Validation fail
+        if ($validator->fails()) {
+            $statusCode = 500;
+            $data = array(
+                'code' => '500',
+                'status' => 'error',
+                'message' => 'Silahkan cek kelengkapan form anda',
+                'data' => $validator->errors()->all(),
+            );
+        // Validation success
+        }else{
+            $vendor = Vendor::where('id',$request->vendor_id)->first();
+            if($request->status == 1){
+                $vendor->verifyConfirmation = "Congratulory Message";
+            }else{
+                $vendor->verifyConfirmation = "Rejection Message";
+            }
+                $vendor->status = $request->status;    
+                $vendor->save();
+                // Send Email Confirmation 
+                $this->sendEmail($vendor);
+        }
+    }
+
+    // KONFIRMASI
+    public function sendEmail($vendor){
+        $data = array(
+            'email' => $vendor->email,
+            'route' => 'vendorVerify',
+            'verifyToken' => $vendor->verifyToken
+        );
+        Mail::send('mail.verifyEmail',$data, function($message) use ($data){
+            $message->to($data['email']);
+            $message->subject('Vendor Register');
+        });
     }
 }

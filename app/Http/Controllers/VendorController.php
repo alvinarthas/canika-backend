@@ -71,23 +71,18 @@ class VendorController extends Controller
                 'kota' => $request->kota,
                 'avatar' => $request->avatar,
                 'status' => 0,
-                'email_konf' => 0,
-                'sms_konf' => 0,
                 'verifyToken' => Str::random(40),
             ));
             
             try{
                 $vendor->save();
 
-                // Send Email Confirmation 
-                $this->sendEmail($vendor);
-
                 // Response
                 $statusCode = 200;
                 $data = array(
                     'code' => '200',
                     'status' => 'success',
-                    'message' => 'Vendor Berhasil dibuat, silahkan cek Email Anda di '.$request->email.' '
+                    'message' => 'Vendor Berhasil dibuat, silahkan menunggu approval dari admin canika. Terima Kasih.'
                 );
             }catch(\Exception $e){
                 $statusCode = 500;
@@ -244,28 +239,6 @@ class VendorController extends Controller
             $message->subject('Vendor Register');
         });
     }
-
-    public function vendor_verify($email,$verifyToken){
-        $vendor = Vendor::where(['email'=>$email,"verifyToken"=>$verifyToken])->first();
-        if($vendor){
-            Vendor::verifyAccount($email,$verifyToken);
-            // Go To Page Succes
-            return redirect('/')->with('status', 'Selamat!!! Akun anda telah diverifikasi. Silahkan masuk dengan akun anda.');
-        }else{
-            // Go To Page Failed
-            return redirect('/')->with('status', 'Terjadi Kesalahan pada Verifikasi Akun anda');
-        }
-    }
-
-    // public function vendor_sms(){
-    //     $nexmo = app('Nexmo\Client');
-
-    //     $nexmo->message()->send([
-    //         'to'   => '6282216418599',
-    //         'from' => '6287722044120',
-    //         'text' => 'Testing SMS Canika'
-    //     ]);
-    // }
 
     public function email_update(Request $request){
         // Validate
@@ -619,17 +592,17 @@ class VendorController extends Controller
         $rating = $request->rating;
         $kategori = $request->kategori;
         $search = $request->search;
-
+        $tag = $request->tag;
         if($search){
-            if($harga1||$harga2||$rating||$kategori){
+            if($harga1||$harga2||$rating||$kategori||$tag){
                 // api filter with search param
-                $rate = Rating::filterRatingSearch($harga1,$harga2,$rating,$kategori,$search);
+                $rate = Rating::filterRatingSearch($harga1,$harga2,$rating,$kategori,$search,$tag);
             }else{
                 // api search
                 $rate = Vendor::searchVendor($search);
             }
         }else{
-            $rate = Rating::filterRating($harga1,$harga2,$rating,$kategori);
+            $rate = Rating::filterRating($harga1,$harga2,$rating,$kategori,$tag);
         }
         
 

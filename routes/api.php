@@ -165,3 +165,5 @@ use Illuminate\Http\Request;
     Route::put('/report-update','FreezeController@report_update');
 // API SUBSCRIBE
     Route::get('/subscribe-all','SubscribeController@all');
+// API TAG
+    Route::get('/tag-all','API\BarangController@tag_all');

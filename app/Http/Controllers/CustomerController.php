@@ -55,6 +55,7 @@ class CustomerController extends Controller
     }
 
     public function customer_register(Request $request){
+        
         // Validate
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:tbl_customer',
@@ -93,6 +94,7 @@ class CustomerController extends Controller
                 'status' => 0,
                 'verifyToken' => Str::random(40),
                 'gender' => $request->gender,
+                'subscribe' => (int)filter_var($request->isSubscribeNewsLetter, FILTER_VALIDATE_BOOLEAN),
             ));
             
             // success
@@ -169,6 +171,9 @@ class CustomerController extends Controller
             $customer = Customer::where('email',$request->email)->where('status',1)->first();
             // FOUND
             if($customer && Hash::check($request->password, $customer->password)){
+                $customer->deviceID = $request->deviceID;
+                $customer->update();
+                
                 $statusCode = 200;
                 $data = array(
                     'code' => '200',

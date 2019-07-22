@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Exceptions\Handler;
 use Illuminate\Support\Facades\Validator;
+
+// Model
 use App\Barang;
 use App\Jenis;
 use App\Gallery;
 use App\Rating;
 use App\Wishlist;
+use App\Tag;
+use App\BarangTag;
 
 class BarangController extends Controller
 {
@@ -82,6 +86,16 @@ class BarangController extends Controller
                             ));
 
                             $image->save();
+                        }
+                    }
+                    if($request->tag){
+                        foreach($request->tag as $tag){
+                            $brg_tag = new BarangTag(array(
+                                'barang_id'=> $barang->id,
+                                'tag_id' => $tag
+                            ));
+    
+                            $brg_tag->save();
                         }
                     }
                     
@@ -361,4 +375,14 @@ class BarangController extends Controller
         return response()->json($data,$statusCode);
     }
 
+    public function tag_all(){
+        $statusCode = 200;
+        $data = array(
+            'code' => '200',
+            'status' => 'success',
+            'message' => 'Daftar Tag',
+            'data' => Tag::all()
+        );
+        return response()->json($data,$statusCode);
+    }
 }
