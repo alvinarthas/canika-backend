@@ -34,4 +34,15 @@ class Wishlist extends Model
         ->groupBy('id')
         ->get();
     }
+
+    public static function searchWishlist($id,$params){
+        return Wishlist::join('tbl_barang','tbl_barang.id','=','tbl_wishlist.barang_id')
+        ->join('tbl_gallery','tbl_barang.id','=','tbl_gallery.barang_id')
+        ->where('tbl_wishlist.customer_id',$id)
+        ->where('tbl_barang.nama','LIKE',$params.'%')
+        ->select(DB::raw('tbl_barang.id,tbl_barang.nama,tbl_barang.deskripsi,tbl_gallery.image,tbl_wishlist.id as wishlist_id'))
+        ->distinct()
+        ->groupBy('id')
+        ->get();
+    }
 }

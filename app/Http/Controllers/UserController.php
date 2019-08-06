@@ -38,6 +38,7 @@ class UserController extends Controller
             if($request->jenis == 0){
                 // Check data
                 $user = Customer::where('email',$request->email)->where('status',1)->first();
+                
             }else{
                 // Check data
                 $user = Vendor::where('email',$request->email)->where('status',1)->first();
@@ -45,6 +46,10 @@ class UserController extends Controller
             
             // FOUND
             if($user && Hash::check($request->password, $user->password)){
+                if($request->jenis == 0){
+                    $user->deviceToken = $request->deviceToken;
+                    $user->update();
+                }
                 $statusCode = 200;
                 $data = array(
                     'code' => '200',

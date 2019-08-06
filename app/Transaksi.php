@@ -67,8 +67,8 @@ class Transaksi extends Model
             ->join('tbl_vendor as v','v.id','=','b.vendor_id')
             ->join('tbl_gallery as g','b.id','=','g.barang_id')
             ->join('tbl_trxhistory as t','t.trx_id','=','tbl_trx.id')
-            ->join('keterangan_payment as k','t.status','=','k.id')
-            ->select(DB::raw('tbl_trx.status,tbl_trx.id as trx_id,tbl_trx.harga,tbl_trx.dp_persen,v.nama as vendor,v.avatar,b.nama as barang,g.image,k.keterangan'))
+            // ->join('keterangan_payment as k','t.status','=','k.id')
+            ->select(DB::raw('tbl_trx.status,tbl_trx.id as trx_id,tbl_trx.harga,tbl_trx.dp_persen,v.nama as vendor,v.avatar,b.nama as barang,g.image,tbl_trx.created_at as trx_date'))
             ->where('tbl_trx.id',$trx->id)
             ->orderBy('g.id','ASC')
             ->orderBy('t.created_at','DESC')
@@ -149,6 +149,34 @@ class Transaksi extends Model
         ->select(DB::raw('c.username as customer,c.id as customer_id,b.nama as barang,b.id as barang_id, v.nama as vendor, v.id as vendor_id,tbl_trx.created_at as date,tbl_trx.cancel_reason'))
         ->where('tbl_trx.id',$trx_id)
         ->first();
+    }
+
+    public static function trxSearch($jenis,$params,$customer){
+        $transaksi = Transaksi::where('customer_id',$customer);
+        if($jenis = 1){
+            $transaksi->where('status',0);
+        }else{
+            $transaksi->whereIn('status',array(1,99));
+        }
+        $data = collect();
+        foreach($transaksi->get() as $trx){
+            $newtrx =  Transaksi::join('tbl_barang as b','b.id','=','tbl_trx.barang_id')
+            ->join('tbl_vendor as v','v.id','=','b.vendor_id')
+            ->join('tbl_gallery as g','b.id','=','g.barang_id')
+            ->join('tbl_trxhistory as t','t.trx_id','=','tbl_trx.id')
+            ->join('keterangan_payment as k','t.status','=','k.id')
+            ->select(DB::raw('tbl_trx.id as trx_id,tbl_trx.harga,tbl_trx.dp_persen,v.nama as vendor,v.avatar,b.nama as barang,g.image,k.keterangan,tbl_trx.dp_status,tbl_trx.created_at as tgl_trx'))
+            ->where('tbl_trx.id',$trx->id)
+            ->where('b.nama','LIKE',$params.'%')
+            ->orderBy('g.id','ASC')
+            ->orderBy('t.created_at','DESC')
+            ->limit(1)
+            ->first();
+            if($newtrx){
+                $data->push($newtrx);
+            }
+        }
+        return $data;
     }
 
     // ADMIN

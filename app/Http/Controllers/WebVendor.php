@@ -79,7 +79,8 @@ class WebVendor extends Controller
         $vendor = Vendor::where('id',$request->vendor_id)->first();
         try{
             $vendor->update(request()->all());
-
+            // Send Email Confirmation
+            $this->sendEmail($vendor);
             return redirect()->route('getVendor');
         }catch(\Exception $e){
             return redirect()->back()->withErrors($e);
@@ -125,12 +126,16 @@ class WebVendor extends Controller
     public function sendEmail($vendor){
         $data = array(
             'email' => $vendor->email,
-            'route' => 'vendorVerify',
-            'verifyToken' => $vendor->verifyToken
         );
-        Mail::send('mail.verifyEmail',$data, function($message) use ($data){
+
+        if($vendor->status == 1){
+            $data['message'] = "Akun kamu sudah diverifikasi oleh pihak canika, silahkan login untuk menggunakan akun anda.";
+        }elseif($vendor->status == 3){
+            $data['message'] = "Akun kamu telah di banned oleh pihak canika, sementara ini anda tidak bisa menggunakan akun anda.";
+        }
+        Mail::send('mail.vendorMessage',$data, function($message) use ($data){
             $message->to($data['email']);
-            $message->subject('Vendor Register');
+            $message->subject('Vendor Confirmation');
         });
     }
 }

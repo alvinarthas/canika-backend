@@ -54,7 +54,7 @@ class Notifikasi extends Model
 
         $notifikasi->save();
 
-        SendFcm($info->customer_id,$keterangan);
+        Notifikasi::SendFcm($info->customer_id,$keterangan);
     }
 
     public static function getNotif($jenis,$user){
@@ -67,7 +67,7 @@ class Notifikasi extends Model
     }
 
     public static function SendFcm($customer,$message){
-        $device_id = Customer::where('id',$customer)->first()->deviceID;
+        $device_id = Customer::where('id',$customer)->first()->deviceToken;
         //API URL of FCM
         $url = 'https://fcm.googleapis.com/fcm/send';
 
@@ -80,6 +80,7 @@ class Notifikasi extends Model
                     $device_id
             ),
             'data' => array (
+                    "title" => "Canika Messaging",
                     "message" => $message
             )
         );

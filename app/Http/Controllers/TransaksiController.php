@@ -209,6 +209,34 @@ class TransaksiController extends Controller
         return response()->json($data,$statusCode);
     }
 
+    public function search(Request $request){
+        $customer = $request->customer_id;
+        $jenis = $request->jenis;
+        $params = $request->params;
+
+        $transaksi = Transaksi::trxSearch($jenis,$params,$customer);
+        if(count($transaksi) > 0){
+            $statusCode = 200;
+            $data = array(
+                'code' => '200',
+                'status' => 'success',
+                'message' => 'Data Transaksi Customer',
+                'data' => $transaksi,
+            );
+        }else{
+            $statusCode = 500;
+            $data = array(
+                'code' => '500',
+                'status' => 'error',
+                'message' => 'Data Transaksi Customer tidak ditemukan'
+            );
+        }
+        // Send Response
+        return response()->json($data,$statusCode);
+
+        
+    }
+
     // TRANSAKSI HISTORY
 
     public function trxhistory_all($id){
@@ -481,6 +509,32 @@ class TransaksiController extends Controller
         $customer = $request->customer_id;
 
         $result = Wishlist::filter($kat,$customer);
+
+        if($result){
+            $statusCode = 200;
+            $data = array(
+                'code' => '200',
+                'status' => 'success',
+                'message' => 'Daftar Wishlist ditemukan',
+                'data' => $result
+            );
+        }else{
+            $statusCode = 500;
+            $data = array(
+                'code' => '500',
+                'status' => 'gagal',
+                'message' => 'Daftar Wishlist tidak ditemukan'
+            );
+        }
+
+        return response()->json($data,$statusCode);
+    }
+
+    public function wishlist_search(Request $request){
+        $customer = $request->customer_id;
+        $params = $request->params;
+
+        $result = Wishlist::searchWishlist($customer,$params);
 
         if($result){
             $statusCode = 200;

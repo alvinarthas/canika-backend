@@ -109,6 +109,7 @@ use Illuminate\Http\Request;
     Route::get('/wishlist-all/{id}', 'TransaksiController@wishlist_all');
     Route::post('/wishlist-store', 'TransaksiController@wishlist_store');
     Route::post('/wishlist-filter', 'TransaksiController@wishlist_filter');
+    Route::get('/wishlist-search', 'TransaksiController@wishlist_search');
     Route::delete('/wishlist-delete', 'TransaksiController@wishlist_delete');
 
     // Transaksi Awal
@@ -119,6 +120,7 @@ use Illuminate\Http\Request;
     Route::post('/trx-payment', 'TransaksiController@payment');
     Route::put('/trx-delete/{id}', 'TransaksiController@delete');
     Route::get('/trx-awal', 'TransaksiController@awal');
+    Route::get('/trx-search','TransaksiController@search');
 
     // Transaksi History
     Route::get('/trxhistory-all/{id}', 'TransaksiController@trxhistory_all');

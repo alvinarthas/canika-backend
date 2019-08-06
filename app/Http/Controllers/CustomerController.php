@@ -171,7 +171,7 @@ class CustomerController extends Controller
             $customer = Customer::where('email',$request->email)->where('status',1)->first();
             // FOUND
             if($customer && Hash::check($request->password, $customer->password)){
-                $customer->deviceID = $request->deviceID;
+                $customer->deviceToken = $request->deviceToken;
                 $customer->update();
                 
                 $statusCode = 200;
