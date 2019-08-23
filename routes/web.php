@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 // HOME    
 Route::get('/admin/home','WebHome@index')->name('getHome');
+Route::get('/','WebHome@home')->name('Home');
 Route::post('login','WebHome@login')->name('Login');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['checkAdmin']], function(){

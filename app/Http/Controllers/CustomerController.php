@@ -127,6 +127,7 @@ class CustomerController extends Controller
 
     public function sendEmail($customer){
         $data = array(
+            'nama' => $customer->nama,
             'email' => $customer->email,
             'route' => 'customerVerify',
             'verifyToken' => $customer->verifyToken

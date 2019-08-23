@@ -20,6 +20,10 @@ class WebHome extends Controller
         
     }
 
+    public function home(){
+        return view('mail.verifyEmail');
+    }
+
     public function login(Request $request){
         // Validate
         $validator = Validator::make($request->all(), [

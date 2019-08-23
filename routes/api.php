@@ -169,3 +169,7 @@ use Illuminate\Http\Request;
     Route::get('/subscribe-all','SubscribeController@all');
 // API TAG
     Route::get('/tag-all','API\BarangController@tag_all');
+// API BLOCK
+    Route::get('/list-block','BlockController@listBlock');
+    Route::post('/vendor-block','BlockController@vendorBlock');
+    Route::delete('/delete-block','BlockController@deleteBlock');
