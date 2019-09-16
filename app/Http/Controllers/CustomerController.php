@@ -127,7 +127,7 @@ class CustomerController extends Controller
 
     public function sendEmail($customer){
         $data = array(
-            'nama' => $customer->nama,
+            'nama' => $customer->first_name,
             'email' => $customer->email,
             'route' => 'customerVerify',
             'verifyToken' => $customer->verifyToken
@@ -143,10 +143,10 @@ class CustomerController extends Controller
         if($customer){
             Customer::verifyAccount($email,$verifyToken);
             // Go To Page Succes
-            // return redirect('/')->with('status', 'Selamat!!! Akun anda telah diverifikasi. Silahkan masuk dengan akun anda.');
+            return redirect('/')->with('status', 'Selamat!!! Akun anda telah diverifikasi. Silahkan masuk dengan akun anda.');
         }else{
             // Go To Page Failed
-            // return redirect('/')->with('status', 'Terjadi Kesalahan pada Verifikasi Akun anda');
+            return redirect('/')->with('status', 'Terjadi Kesalahan pada Verifikasi Akun anda');
         }
     }
 
@@ -401,7 +401,8 @@ class CustomerController extends Controller
         // Validation success
         }else{
             $datasend = array(
-                'email' => $request->email
+                'email' => $request->email,
+                'route' => 'getChangePass',
             );
             Mail::send('mail.forgetPass',$datasend, function($message) use ($datasend){
                 $message->to($datasend['email']);

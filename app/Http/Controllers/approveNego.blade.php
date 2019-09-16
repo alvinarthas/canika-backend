@@ -7,6 +7,5 @@
 </head>
 <body>
     Hi, {{$email}} <br>
-    Terima Kasih sudah mendaftar di canika, silahkan melakukan verifikasi email <a href="{{route($route,["email" => $email, "verifyToken"=> $verifyToken])}}">Disini</a>
-    
+    Nego Harga untuk Barang {{$barang}} dengan harga {{$harga}} telah kami approve
 </body>

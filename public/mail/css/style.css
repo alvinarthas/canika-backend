@@ -78,6 +78,9 @@ p.pesan{
 	background-color: #E53072;
 	color: #fff;
 	font-size: 22px;
+	
+}
+.btn-lg{
 	padding-left: 50px;
 	padding-right: 50px;
 	margin-bottom: 20px;
@@ -135,4 +138,8 @@ footer{
 	font-size: 25px;
 	margin-bottom: 30px;
 	font-weight: bold;
+}
+
+form{
+	margin-bottom: 20px;
 }

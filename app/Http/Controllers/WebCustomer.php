@@ -104,4 +104,39 @@ class WebCustomer extends Controller
             return redirect()->back()->withErrors($e);
         }
     }
+
+    public function getChangePass(Request $request){
+        $email = $request->email;
+        return view('mail.resetpassword',compact('email'));
+    }
+
+    public function storeChangePass(Request $request){
+        // Validate
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        // IF Validation fail
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        // Validation success
+        }else{
+            // Check data
+            $customer = Customer::where('email',$request->email)->where('status',1)->first();
+            $customer->password = Hash::make($request->password);
+            $customer->save();
+            
+            // SEND CONFIRMATION
+            $datasend = array(
+                'email' => $request->email
+            );
+            Mail::send('mail.confirmReset',$datasend, function($message) use ($datasend){
+                $message->to($datasend['email']);
+                $message->subject('Confirmation Reset Passsword Customer');
+            });
+
+            return redirect()->route('Home')->with('status','Password telah diubah, silahkan check Email anda');
+        }
+    }
 }

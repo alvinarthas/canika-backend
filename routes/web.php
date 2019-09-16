@@ -15,6 +15,8 @@
 Route::get('/admin/home','WebHome@index')->name('getHome');
 Route::get('/','WebHome@home')->name('Home');
 Route::post('login','WebHome@login')->name('Login');
+Route::get('customer/changepass','WebCustomer@getChangePass')->name('getChangePass');
+Route::post('customer/changepass/store','WebCustomer@storeChangePass')->name('storeChangePass');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['checkAdmin']], function(){
     // ADMIN

@@ -20,6 +20,10 @@ class Barang extends Model
         return $this->hasMany('App\Gallery');
     }
 
+    public function tag(){
+        return $this->hasMany('App\BarangTag','barang_id');
+    }
+
     public function kategori(){
         return $this->hasOne('App\Kategori','id','kat_id');
     }
@@ -32,6 +36,11 @@ class Barang extends Model
                 array_push($gallery,$galer->image);
             }
             $brg = collect($barang);
+
+            $tag = array();
+            foreach ($barang->tag()->get() as $btag) {
+                array_push($tag,$btag->tag()->first()->tag);
+            }
 
             if($customer){
                 $checkwishlist = Wishlist::checkWishlist($id,$customer);
@@ -51,8 +60,10 @@ class Barang extends Model
             $brg->put('field',$kategori->field);
             $brg->put('prov',$barang->vendor()->first()->prov);
             $brg->put('kota',$barang->vendor()->first()->kota);
+            $brg->put('tag',$tag);
+            $brg->put('gallery',$gallery);
 
-            return $brg->put('gallery',$gallery);
+            return $brg;
         }
     }
 

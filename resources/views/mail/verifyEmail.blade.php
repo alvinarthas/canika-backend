@@ -1,170 +1,74 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Canika | Verifikasi Akun</title>
-	<meta charset="utf-8">
-	{{-- <link rel="stylesheet" type="text/css" href="{{ asset('mail/css/bootstrap.css')}}"> --}}
-	<style type="text/css">
-	/*@media only screen and (max-width: 765px){
-	.logo{
-		min-width: 25%;
-	}
-}*/
-
-html *{
-	font-family: 'Montserrat', sans-serif !important;
-}
-
-h2,h3{
-	font-weight: bold;
-}
-
-
-.row{
-	margin-top: 10px;
-	margin-bottom: 20px;
-	display: flex;
-    flex-wrap: wrap;
-}
-
-.newsletter{
-	max-width: 40%;
-	margin-top: 20px;
-	width: 100%;
-  	height: auto;
-}
-
-.logo{
-	margin-top: 20px;
-	max-width: 20%;
-	width: 100%;
-  	height: auto;
-}
-
-.inline{
-	display: inline-block;
-}
-
-h2.newsletter{
-	vertical-align: middle;
-	margin-top: 32px;
-	margin-left: 10px;
-}
-
-.main{
-	border-top: 5px solid #dd486a;
-	float: none;
-    margin: 0 auto;
-}
-
-h1{
-	font-size: 30px;
-}
-
-.time{
-	font-weight: bold;
-	color: #9B9B9B;
-}
-
-.judul{
-	color: #EA5D90;
-	margin-bottom: 30px;
-	font-weight: bold;
-}
-
-.header{
-	margin-bottom: 50px;
-}
-
-p.pesan{
-	font-size: 20px;
-	color: #808080;
-}
-
-.btn{
-	background-color: #E53072;
-	color: #fff;
-	font-size: 22px;
-	padding-left: 50px;
-	padding-right: 50px;
-	margin-bottom: 20px;
-	margin-top: 10px;
-}
-
-.btn:focus, .btn:hover{
-	color: #fff;
-}
-
-.pesan2{
-	font-size: 16px;
-	color: #8c8c8c;
-}
-
-.email{
-	color: #EE7FA8;
-	font-weight: 600;
-}
-
-.makeup{
-	/*height: 20vh;
-  	width: 100%;
-  	object-fit: cover;*/
-  	width: 100%;
-  	/*max-width: 600px;
-	height: auto;*/
-}
-
-.item-thumbnail{
-	display: block;
-  	margin-left: auto;
-  	margin-right: auto;
-	width: 100%;
-}
-
-.vertical-align {
-    display: flex;
-    align-items: center;
-}
-
-footer{
-	background-color: #F5F5F5;
-	padding-top: 20px;
-	padding-bottom: 50px;
-	margin-top: 50px;
-}
-
-.navbar{
-	margin-bottom: 0px;
-}
-
-.footermsg{
-	color: #E53072;
-	font-size: 25px;
-	margin-bottom: 30px;
-	font-weight: bold;
-}</style>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-</head>
-<body>
-	<div class="container main">
-		<div class="col-8">
-			<img src="{{ asset('mail/img/logoaja.png') }}" class="logo">
-			<hr>
-			<h1 class="judul">Verifikasi Akun</h1>
-			<p class="pesan"> <strong>Hi, John.</strong> Silahkan menggunakan tombol dibawah ini untuk melakukan verifikasi akun anda.</p>
-			<button class="btn btn-lg verBtn">Verifikasi</button>
-			<p class="pesan2">Jika anda memiliki kendala, silakan menghubungi kami melalui</p>
-			<a href="mailto:admin@canika.co.id" class="email">admin@canika.co.id</a>
-			<footer class="navbar navbar-fixed-bottom">
-				<div class="container footer text-center">
-					<div class="col-8">
-						<h1 class="footermsg">Wujudkan Pernikahan Impianmu</h1>
-						<a href="https://play.google.com/store/apps/details?id=com.cnka.canika" target="_blank"><img src="{{ asset('mail/img/googleplay.png') }}" class="img-responsive center-block"></a>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-</body>
+	<head>
+		<title>Canika - Verifikasi Akun</title>
+		<style type="text/css">
+			body *{
+				font-family: 'Montserrat', sans-serif !important;
+			}
+		</style>
+	</head>
+	<body>
+		<table style="width:538px; background-color: #fff; border-top: 3px solid #dd486a" align="center" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td>
+						<table width="470" border="0" align="center" cellpadding="0" cellspacing="0" style="padding-left:5px;padding-right:5px;padding-bottom:10px">
+							<tbody>
+								<tr>
+									<td style="height:65px;border-bottom:1px solid #eee;padding:0px">
+										<img src="{{ asset('mail/img/logoaja.png') }}"
+										width="30%" alt="Canika">
+									</td>
+								</tr>
+								<tr>
+									<td style="padding-top:32px;padding-bottom:16px">
+										<span style="font-size:24px;color:#EA5D90;font-family:Arial,Helvetica,sans-serif;font-weight:bold">
+											Verifikasi Akun
+										</span><br>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding:0px;font-size:12px;line-height:17px;color:#808080;font-family:Arial,Helvetica,sans-serif">
+										<p style="font-size: 14px"><strong>Hi, {{$nama}}.</strong> Silahkan menggunakan tombol dibawah ini untuk melakukan verifikasi akun anda.</p>
+									</td>
+								<tr>
+									<td style="padding-top: 5px;">
+										<a style="color:#fff; text-decoration: none; background-color: #E53072; padding: 10px 35px; font-size: 14px; line-height: 1.33; border-radius: 6px" href="{{route($route,["email" => $email, "verifyToken"=> $verifyToken])}}" target="_blank">Verifikasi</a>
+									</td>
+								</tr>
+								</tr>
+								<tr>
+									<td style="font-size:12px;padding-top:16px;padding-bottom:40px;color:#8c8c8c">
+										<p style="font-size: 12px">Jika anda memiliki kendala, silakan menghubungi kami melalui</p>
+										<a style="color:#EE7FA8; text-decoration: none; font-weight: bold;" href="mailto:admin@canika.co.id" target="_blank">admin@canika.co.id</a><br>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr style="background-color: #F5F5F5">
+					<td>
+						<table width="460" height="55" border="0" align="center" cellpadding="0" cellspacing="0">
+							<tbody>
+								<tr align="center">
+									<td>
+										<p style="color: #E53072; font-weight:bold; font-family:Arial">Wujudkan Pernikahan Impianmu</p>
+									</td>
+								</tr>
+								<tr align="center">
+									<td width="110" style="padding-bottom:20px;">
+										<a href=" " target="_blank">
+											<img src="{{ asset('mail/img/googleplay.png') }}" alt="googleplay" width="30%" hspace="0" vspace="0" border="0" align="top">
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
 </html>

@@ -194,6 +194,17 @@ class BarangController extends Controller
                             $image->save();
                         }
                     }
+
+                    if($request->tag){
+                        foreach($request->tag as $tag){
+                            $brg_tag = new BarangTag(array(
+                                'barang_id'=> $barang->id,
+                                'tag_id' => $tag
+                            ));
+    
+                            $brg_tag->save();
+                        }
+                    }
                     
                     // Response
                     $statusCode = 200;
@@ -357,6 +368,31 @@ class BarangController extends Controller
         $gallery = Gallery::where('image',$image);
         if($gallery){
             $gallery->delete();
+            $statusCode = 200;
+            $data = array(
+                'code' => '200',
+                'status' => 'success',
+                'message' => 'Data Gambar Berhasil dihapus',
+            );
+        }else{
+            $statusCode = 500;
+            $data = array(
+                'code' => '500',
+                'status' => 'error',
+                'message' => 'Data Gambar tidak ditemukan'
+            );
+        }
+        // Send Response
+        return response()->json($data,$statusCode);
+    }
+
+    public function tag_delete(Request $request){
+        $tag = $request->tag;
+        $barang = $request->barang;
+
+        $brg_tag = BarangTag::where('tag_id',$tag)->where('barang_id',$barang)->first();
+        if($brg_tag){
+            $brg_tag->delete();
             $statusCode = 200;
             $data = array(
                 'code' => '200',

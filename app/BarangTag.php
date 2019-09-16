@@ -8,4 +8,8 @@ class BarangTag extends Model
 {
     protected $table = 'brg_tag';
     protected $fillable = ['barang_id','tag_id'];
+
+    public function tag(){
+        return $this->belongsTo('App\Tag');
+    }
 }

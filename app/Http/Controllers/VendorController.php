@@ -466,7 +466,7 @@ class VendorController extends Controller
                     $brrg->put('rate',0);
                 }
                 $brrg->put('image',$image);
-                if($customer > 0){
+                if(isset($customer) && $customer > 0){
                     $checkwishlist = Wishlist::checkWishlist($brg->id,$customer);
                     if($checkwishlist > 0){
                         $wishlist_id = Wishlist::where('barang_id',$brg->id)->where('customer_id',$customer)->first()->id;
