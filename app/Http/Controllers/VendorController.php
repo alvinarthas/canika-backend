@@ -457,7 +457,7 @@ class VendorController extends Controller
                 $getbrg = $vendor->barang()->get();
             }
             foreach($getbrg as $brg){
-                $brrg = collect($brg);
+                $brrg = collect($brg);  
                 $rating = Rating::getRating($brg->id);
                 $image = $brg->gallery()->first()->image;
                 if(!$rating){
@@ -465,7 +465,11 @@ class VendorController extends Controller
                 }else{
                     $brrg->put('rate',0);
                 }
-                $brrg->put('image',$image);
+                if($image){
+                    $brrg->put('image',$image);
+                }else{
+                    $brrg->put('image',null);
+                }
                 if(isset($customer) && $customer > 0){
                     $checkwishlist = Wishlist::checkWishlist($brg->id,$customer);
                     if($checkwishlist > 0){

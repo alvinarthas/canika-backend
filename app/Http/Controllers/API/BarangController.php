@@ -195,6 +195,7 @@ class BarangController extends Controller
                         }
                     }
 
+                    $deltag = BarangTag::where('barang_id',$id)->delete();
                     if($request->tag){
                         foreach($request->tag as $tag){
                             $brg_tag = new BarangTag(array(

@@ -160,6 +160,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Yugo\SMSGateway\Providers\SmsServiceProvider::class,
+        // Barryvdh\Cors
+        Barryvdh\Cors\ServiceProvider::class,
     ],
 
     /*

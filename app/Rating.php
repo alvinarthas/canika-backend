@@ -65,13 +65,15 @@ class Rating extends Model
             $rate->where('tbl_barang.kat_id',$kat);
         }
         if(is_array($tag)){
-            $rate->whereIn('brg_tag.tag_id',$tag);
+            if($tag[0] <> null){
+                $rate->whereIn('brg_tag.tag_id',$tag);
+            }
         }
         if($harga1 <> '' && $harga2 <> ''){
             $rate->whereBetween('tbl_barang.harga1',[$harga1,$harga2]);
         }
         if($param <> ''){
-            $rate->where('tbl_barang.nama','like','%'.$param.'%')->orWhere('a.nama','like','%'.$param.'%');
+            $rate->where('tbl_barang.nama','like',$param.'%')->orWhere('a.nama','like','%'.$param.'%')->orWhere('a.username','like','%'.$param.'%');
         }
         
         $rate->select(DB::raw('a.id,a.nama,a.avatar,a.deskripsi'));
