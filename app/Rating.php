@@ -65,7 +65,8 @@ class Rating extends Model
             $rate->where('tbl_barang.kat_id',$kat);
         }
         if(is_array($tag)){
-            if($tag[0] <> null){
+            if($tag[0] == null || $tag[0] == ""){
+            }else{
                 $rate->whereIn('brg_tag.tag_id',$tag);
             }
         }

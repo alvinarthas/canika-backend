@@ -74,7 +74,6 @@ class BarangController extends Controller
                 'status' => $request->status,
                 'kategori_value' => $request->kategori_value,
             ));
-            
             try{
                 $barang->save();
                 try{
